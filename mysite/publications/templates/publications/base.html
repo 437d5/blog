@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'publications/style.css' %}">
+    <title>BBlog</title>
+</head>
+<body>
+    <h1>Hello at the BBlog - The Best Blog</h1>
+    <a href="{% url "publications:index" %}">Назад к списку записей</a>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

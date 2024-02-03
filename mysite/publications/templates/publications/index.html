@@ -1,0 +1,23 @@
+{% extends "publications/base.html" %}
+{% block content %}
+    <div><form action="{% url 'publications:add_publication' %}" method="POST">
+        {% csrf_token %}
+        <label>Заголовок</label>
+        <input type="text" name="title">
+        <label>Текст поста</label>
+        <input type="text" name="text">
+        <br>
+        <button type="submit">Создать пост</button>
+    </form></div>
+    {% if publications %}
+        <ul>
+            {% for publication in publications %}
+                <li>
+                    <a href="{% url 'publications:detail' publication.id %}">{{ publication.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no publications yet.</p>
+    {% endif %}
+{% endblock %}
