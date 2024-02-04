@@ -1,0 +1,8 @@
+.create-comment-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.comment-text {
+    font-size: larger;
+}

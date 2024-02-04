@@ -5,12 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'publications/style.css' %}">
-    <title>BBlog</title>
+    <link rel="stylesheet" href="{% static 'publications/index.css' %}">
+    <link rel="stylesheet" href="{% static 'publications/comments.css' %}">
+    <link rel="stylesheet" href="{% static 'publications/detail.css' %}">
+    <title>Blog</title>
 </head>
 <body>
-    <h1>Hello at the BBlog - The Best Blog</h1>
-    <a href="{% url "publications:index" %}">Назад к списку записей</a>
-    {% block content %}
-    {% endblock content %}
+
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>
+                        Welcome at the best blog
+                    </h1>
+                </div>
+            </div>
+            <div class="header-content">
+                <div>
+                    <a href="{% url 'publications:index' %}" class="link">Назад к списку записей</a>
+                </div>
+            </div>
+        </header>
+    </div>
+    <div class="wrapper">
+        {% block content %}
+        {% endblock content %}
+    </div>
 </body>
 </html>
