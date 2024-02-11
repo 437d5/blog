@@ -1,0 +1,16 @@
+.create-post-form {
+    display: flex;
+    justify-content: space-around;
+}
+.text {
+    height: 100px;
+    width: 500px;
+}
+.bttn-submit {
+    height: 125px;
+    display: flex;
+    align-items: center;
+}
+.post-link {
+    padding-bottom: 8px;
+}

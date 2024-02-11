@@ -3,15 +3,26 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .models import Publication, Comment
+from .forms import CreatePublicatonsForm
 
 def index(request):
     template_name = "publications/index.html"
     publications = Publication.objects.order_by("-pub_date")[:10]
+    form = CreatePublicatonsForm()
     context = {
         "publications": publications
     }
+    if request.method == "POST":
+        form = CreatePublicatonsForm(request.POST)
+        context["form"] = form
+        return HttpResponseRedirect(reverse("publications:index"))
+    else:
+        form = CreatePublicatonsForm()
+        context["form"] = form
 
-    return render(request, template_name=template_name, context=context)
+        return render(request, template_name=template_name, context=context)
+
+
 
 def detail(request, pk):
     # Try to get publication with pk or 404
@@ -35,8 +46,6 @@ def detail(request, pk):
 def comment(request, pk):
     publication = get_object_or_404(Publication, pk=pk)
     comments = publication.comment_set.all()
-    if not comments:
-        return HttpResponse("No comments there yet")
     context = {
         "comments": comments,
         "pk": pk
