@@ -1,28 +1,27 @@
 {% extends "publications/base.html" %}
     {% block content %}
     <div>
-        <form action="{% url 'publications:add_comment' pk %}" method="POST">
+        <form action="{% url 'publications:add_comment' pk %}" method="POST" class="create-comment-form">
             {% csrf_token %}
-            <label>Текст комментария</label>
-            <input type="text" name="text">
-            <br>
-            <button type="submit">Добавить комментарий</button>
+            <label for="text">Текст комментария</label>
+            <input id="text" name="text" class="text">
+            <div class="bttn-submit">
+                <button type="submit">Добавить комментарий</button>
+            </div>
         </form>
     </div>
     <div>
         {% if not comments %}
             <h3>Комментариев пока нету, но Вы можете оставить новый.</h3>
         {% endif %}
-        <ul>
             {% for comment in comments %}
-                <li>
-                    <p>{{ comment.text }}</p>
+                <div class="comment">
+                    <p class="comment-text">{{ comment.text }}</p>
                     <form action="{% url 'publications:del_comment' pk=pk comment_id=comment.id %}" method="POST">
                         {% csrf_token %}
                         <button type="submit">Удалить комментарий</button>
                     </form>
-                </li>
+                </div>
             {% endfor %}
-        </ul>
     </div>
     {% endblock %}
