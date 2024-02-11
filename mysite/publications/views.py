@@ -10,6 +10,8 @@ def index(request):
     context = {
         "publications": publications
     }
+
+
     return render(request, template_name=template_name, context=context)
 
 def detail(request, pk):
