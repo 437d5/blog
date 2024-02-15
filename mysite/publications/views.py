@@ -15,6 +15,10 @@ def index(request):
     if request.method == "POST":
         form = CreatePublicatonsForm(request.POST)
         context["form"] = form
+        title = request.POST.get("title")
+        text = request.POST.get("text")
+        new_publication = Publication(title=title, text=text)
+        new_publication.save()
         return HttpResponseRedirect(reverse("publications:index"))
     else:
         form = CreatePublicatonsForm()
@@ -63,26 +67,9 @@ def comment(request, pk):
         context["form"] = form
         return render(request, "publications/comments.html", context=context)
 
-
-def add_comment(request, pk):
-    publication = get_object_or_404(Publication, pk = pk)
-    text = request.POST["text"]    
-    new_comment = publication.comment_set.create(text=text)
-    new_comment.save()
-
-    return HttpResponseRedirect(reverse("publications:comment", args=(pk,)))
-
-def add_publication(request):
-    title = request.POST["title"]
-    text = request.POST["text"]
-    
-    new_publication = Publication(title=title, text=text)
-    new_publication.save()
-    
-    return HttpResponseRedirect(reverse("publications:index"))
-
 def del_comment(request, comment_id, pk):
     comment_to_delete = get_object_or_404(Comment, pk=comment_id)
     if comment_to_delete:
         comment_to_delete.delete()
     return HttpResponseRedirect(reverse("publications:comment", args=(pk,)))
+
