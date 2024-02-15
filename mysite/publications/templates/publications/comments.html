@@ -1,10 +1,9 @@
 {% extends "publications/base.html" %}
     {% block content %}
     <div>
-        <form action="{% url 'publications:add_comment' pk %}" method="POST" class="create-comment-form">
+        <form action="{% url 'publications:comment' pk %}" method="POST" class="create-comment-form">
             {% csrf_token %}
-            <label for="text">Текст комментария</label>
-            <input id="text" name="text" class="text">
+            {{ form }}
             <div class="bttn-submit">
                 <button type="submit">Добавить комментарий</button>
             </div>

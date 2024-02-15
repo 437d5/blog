@@ -3,12 +3,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .models import Publication, Comment
-from .forms import CreatePublicatonsForm
+from .forms import CreatePublicatonsForm, CreateCommentsForm
+
 
 def index(request):
     template_name = "publications/index.html"
     publications = Publication.objects.order_by("-pub_date")[:10]
-    form = CreatePublicatonsForm()
     context = {
         "publications": publications
     }
@@ -50,7 +50,19 @@ def comment(request, pk):
         "comments": comments,
         "pk": pk
     }
-    return render(request, "publications/comments.html", context=context)
+    if request.method == "POST":
+        form = CreateCommentsForm(request.POST)
+        context["form"] = form
+        if form.is_valid():
+            text = form.cleaned_data["text"]
+            new_comment = publication.comment_set.create(text=text)
+            new_comment.save()
+        return HttpResponseRedirect(reverse("publications:comment", kwargs={"pk": pk}))
+    else:
+        form = CreateCommentsForm()
+        context["form"] = form
+        return render(request, "publications/comments.html", context=context)
+
 
 def add_comment(request, pk):
     publication = get_object_or_404(Publication, pk = pk)
