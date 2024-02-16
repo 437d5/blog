@@ -12,6 +12,7 @@ def index(request):
     context = {
         "publications": publications
     }
+<<<<<<< HEAD
     if request.method == "POST":
         form = CreatePublicatonsForm(request.POST)
         context["form"] = form
@@ -27,6 +28,11 @@ def index(request):
         return render(request, template_name=template_name, context=context)
 
 
+=======
+
+
+    return render(request, template_name=template_name, context=context)
+>>>>>>> master
 
 def detail(request, pk):
     # Try to get publication with pk or 404
