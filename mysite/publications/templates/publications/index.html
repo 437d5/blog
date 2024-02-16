@@ -2,18 +2,9 @@
 {% block content %}
         <main class="main">
             <div class="create-post">
-                <form action="{% url 'publications:add_publication' %}" method="POST" class="create-post-form">
+                <form action="{% url 'publications:index' %}" method="POST" class="create-post-form">
                     {% csrf_token %}
-                    <div class="create-title">
-                        <label for="title">Заголовок
-                            <input type="text" name="title" class="text">
-                        </label>
-                    </div>
-                    <div class="create-text">
-                        <label for="text">Текст поста
-                            <input type="text" name="text" class="text">
-                        </label>
-                    </div>
+                    {{ form }}
                     <div class="bttn-submit">
                         <button type="submit">Создать пост</button>
                     </div>

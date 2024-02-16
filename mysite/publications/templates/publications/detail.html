@@ -1,7 +1,15 @@
 {% extends "publications/base.html" %}
 {% block content %}
-    <h2>{{ title }}</h2>
-    <p>{{ text }}</p>
-    <small><i>Publicated : {{ pub_date }}</i></small>
-    <a href="{% url 'publications:comment' publication.id %}">comment</a>
+    <div>
+        <h2 class="title">{{ title }}</h2>
+    </div>
+    <div>
+        <p class="post-text">{{ text }}</p>
+    </div>
+    <div class="date">
+        <p>
+            Publicated : {{ pub_date }}
+        </p>
+    </div>
+    <a href="{% url 'publications:comment' publication.id %}" class="link">Комментариев: {{ comment_num }}</a>
 {% endblock %}
