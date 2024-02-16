@@ -2,7 +2,7 @@
 {% block content %}
         <main class="main">
             <div class="create-post">
-                <form action="{% url 'publications:add_publication' %}" method="POST" class="create-post-form">
+                <form action="{% url 'publications:index' %}" method="POST" class="create-post-form">
                     {% csrf_token %}
                     {{ form }}
                     <div class="bttn-submit">
